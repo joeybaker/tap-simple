@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+/* eslint-disable no-process-exit */
+var path = require('path')
+  , prettifyError = require('prettify-error')
+  , tapSimple
+
+require('babel/register', {
+  only: new RegExp(path.resolve(__dirname, '..', 'index.js'))
+})
+
+tapSimple = require('../index.js')()
+
+process.stdin
+  .pipe(tapSimple)
+  .pipe(process.stdout)
+
+process.on('uncaughtException', function onUncaughtException (err) {
+  console.error(prettifyError(err))
+  process.exit(1)
+})
+
+process.on('exit', function onProcessExit (status) {
+  if (status === 1 || tapSimple.failed) {
+    process.exit(1)
+  }
+})
