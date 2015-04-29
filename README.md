@@ -2,47 +2,62 @@
 
 Simple tap formatter
 
+![tap-simple](https://cloudup.com/c53SAyv9vrs+)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Install](#install)
 - [Usage](#usage)
+  - [CLI](#cli)
+  - [Programmatic](#programmatic)
+- [Tests](#tests)
 - [Developing](#developing)
   - [Requirements](#requirements)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Install
 
 ```sh
-npm i -S tap-simple
+npm i -g tap-simple
 ```
 
 
 ## Usage
 
-```js
-var tapSimple = require('tap-simple')
-
-tapSimple('Rainbow')
+### CLI
+```sh
+tape test/*test.js | tap-simple
 ```
 
-## Methods
-### get `(<String> string)`
-Returns the string passed to it.
+### Programmatic
+```js
+import tapSimple from 'tap-simple'
 
-## Events
-### myEvent `(<String> myString)`
-Emitted when x happens. Passes `myString` which is a y.
+process.stdin
+  .pipe(tapSimple())
+  .pipe(process.stdout)
+```
+
+Tap-simple is written in es6. You need to compile it if you're not in an es6 environment.
+
+```js
+require('babel/register')
+var tapSimple = require('tap-simple')
+
+process.stdin
+  .pipe(tapSimple())
+  .pipe(process.stdout)
+```
 
 ## Tests
 Tests are in [tape](https://github.com/substack/tape) and code coverage is run though [covert](https://github.com/substack/covert).
 
-* `npm test` will run both server and browser tests
-* `npm run test-browser` and `npm run test-server` run their respective tests
-* `npm run tdd-server` will run the server tests on every file change.
-* `npm run tdd-browser` will run the browser tests on every file change.
+* `npm test` will run the tests.
+* `npm run tdd` will run the tests on every file change.
 
 ## Developing
 To publish, run `npm run release -- [{patch,minor,major}]`
