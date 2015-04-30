@@ -63,6 +63,7 @@
     "ansidiff": "^1.0.0",
     "babel": "^5.1.13",
     "chalk": "^1.0.0",
+    "char-spinner": "^1.0.1",
     "difflet": "^0.2.6",
     "duplexer": "^0.1.1",
     "hirestime": "^1.0.2",

@@ -62,6 +62,10 @@ var _symbols = require('./lib/symbols.js');
 
 var _symbols2 = _interopRequireDefault(_symbols);
 
+var _spinner = require('char-spinner');
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
 var OUTPUT_PADDING = '  ';
 var objdiff = _difflet2['default']({
   indent: OUTPUT_PADDING.length,
@@ -216,6 +220,7 @@ module.exports = function tapSimple() {
   var parser = _tapOut2['default']();
   var stream = _duplexer2['default'](parser, output);
   var getElapsed = _hirestime2['default']();
+  var progress = _spinner2['default']();
 
   parser.on('test', function onTest(test) {
     tests.set(test.number, _import2['default'].assign(test, {
@@ -245,6 +250,7 @@ module.exports = function tapSimple() {
   });
 
   parser.on('output', function onOutput(results) {
+    clearInterval(progress);
     output.push('\n\n');
     output.push(internals.formatResults(results, getElapsed()));
     output.push('\n\n\n');

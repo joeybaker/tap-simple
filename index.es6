@@ -13,6 +13,7 @@ import tapOut from 'tap-out'
 import through from 'through2'
 import lTrimList from './lib/l-trim-list.js'
 import symbols from './lib/symbols.js'
+import spinner from 'char-spinner'
 
 const OUTPUT_PADDING = '  '
 const objdiff = difflet({
@@ -181,6 +182,7 @@ module.exports = function tapSimple () {
   const parser = tapOut()
   const stream = duplexer(parser, output)
   const getElapsed = hirestime()
+  const progress = spinner()
 
   parser.on('test', function onTest (test) {
     tests.set(test.number, _.assign(test, {
@@ -210,6 +212,7 @@ module.exports = function tapSimple () {
   })
 
   parser.on('output', function onOutput (results) {
+    clearInterval(progress)
     output.push('\n\n')
     output.push(internals.formatResults(results, getElapsed()))
     output.push('\n\n\n')
