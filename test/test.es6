@@ -15,7 +15,7 @@ const execTests = function execTests (file, callback) {
 const getLines = (output) => _(output.split('\n')).compact().map(_.trim).value()
 
 test('passes', (t) => {
-  execTests('pass.js', (err, output) => {
+  execTests('pass.es6', (err, output) => {
     t.error(err)
     const lines = getLines(output)
 
@@ -54,7 +54,7 @@ test('passes', (t) => {
 })
 
 test('failures', (t) => {
-  execTests('fail.js', (err, output) => {
+  execTests('fail.es6', (err, output) => {
     t.ok(err, 'commeand errors')
     const lines = getLines(output)
 

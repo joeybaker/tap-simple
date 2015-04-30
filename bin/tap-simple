@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
 /* eslint-disable no-process-exit */
-var path = require('path')
-  , prettifyError = require('prettify-error')
+var prettifyError = require('prettify-error')
   , tapSimple
 
-require('babel/register', {
-  only: new RegExp(path.resolve(__dirname, '..', 'index.js'))
-})
+require('babel/polyfill')
 
 tapSimple = require('../index.js')()
 

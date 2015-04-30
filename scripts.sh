@@ -4,7 +4,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 function lint(){
-  eslint --no-eslintrc --config .eslintrc ${@-.}
+  eslint --no-eslintrc --config .eslintrc --ignore-path .eslintignore ${@-.}
 }
 
 function git_require_clean_work_tree(){
