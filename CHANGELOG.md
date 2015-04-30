@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.1 | 2015-04-30
+* fix: es5 combat: ensure babel’s polypill is loaded
+
 ## v0.3.0 | 2015-04-30
 * add: a spinner to show progress while tests are succeeding
 * dev: release script now commits build files
@@ -18,6 +21,7 @@
 
 ## v0.1.0 | 2015-04-29
 Init
+
 
 
 
