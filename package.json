@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "start": "node index.js",
-    "test": "babel-node node_modules/.bin/tape test/*.js | ./bin/tap-simple",
+    "test": "babel-node test/test.js | ./bin/tap-simple",
     "tdd": "nodemon -x npm -i node_modules/ -- run test",
     "note1": "we can't have nice things. prepublish also runs on npm install https://github.com/npm/npm/issues/6394 in-publish hacks around this",
     "prepublish": "in-publish && source ./scripts.sh && npm prune && npm run gitPush || in-install",
