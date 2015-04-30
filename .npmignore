@@ -1,5 +1,4 @@
 .travis.yml
-test/*
 .editorconfig
 .gitignore
 .jscsrc
@@ -14,7 +13,8 @@ CHANGELOG.*
 scripts.sh
 npm-debug.log
 .DS_Store
-
+*.es6
 
 .eslintrc
+.eslintignore
 test/
