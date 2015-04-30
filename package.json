@@ -1,19 +1,17 @@
 {
-  "version": "0.3.0",
+  "version": "0.0.0",
   "name": "tap-simple",
-  "description": "Simple tap formatter",
+  "description": "Simple tap formatter: does not clutter output with successes and shows a diff of actual vs. expected.",
   "authors": [
     {
       "name": "Joey Baker",
       "email": "joey@byjoeybaker.com",
       "url": "byjoeybaker.com"
-    },
-    {
-      "name": "Ellen Gummesson"
     }
   ],
   "contributors": [
-    "Louis Acresti <louis.acresti@gmail.com> (http://namuol.github.io/)"
+    "Louis Acresti <louis.acresti@gmail.com> (http://namuol.github.io/)",
+    "Ellen Gummesson"
   ],
   "repository": "joeybaker/tap-simple",
   "license": "Artistic-2.0",

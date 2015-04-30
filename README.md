@@ -1,6 +1,6 @@
 # tap-simple [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
-Simple tap formatter
+Simple tap formatter: does not clutter output with successes and shows a diff of actual vs. expected.
 
 ![tap-simple](https://cloudup.com/c53SAyv9vrs+)
 
@@ -72,6 +72,7 @@ _NOTE: you might need to `sudo ln -s /usr/local/bin/node /usr/bin/node` to ensur
 
 Artistic 2.0 © [Joey Baker](byjoeybaker.com)
 
+Thanks to [tap-spec](https://github.com/scottcorgan/tap-spec) for the original structure and [tap-difflet](https://github.com/namuol/tap-difflet) for the original diffing algorithm.
 
 [npm-url]: https://npmjs.org/package/tap-simple
 [npm-image]: https://badge.fury.io/js/tap-simple.svg
