@@ -21,10 +21,16 @@ const objdiff = difflet({
 }).compare
 const internals = {}
 const ignoreCommentRegex = /^1\.\.\d*$/
+const errorMessageRegex = /^\[([A-z]{1,})?Error:\s(.*?)\]$/
 
 internals.parseStringToJS = function parseStringToJS (str, type) {
   const toNumber = (i) => i.includes('.') ? parseFloat(i) : parseInt(i, 10)
   const toObject = (i) => rJSON.parse(i)
+  const toError = (i) => {
+    return errorMessageRegex.test(i)
+      ? new Error(i.replace(errorMessageRegex, '$2'))
+      : false
+  }
   const toString = (i) => i
 
   if (type) return [`to${_.capitalize(type)}`](str)
@@ -36,7 +42,7 @@ internals.parseStringToJS = function parseStringToJS (str, type) {
     return toObject(str)
   }
   catch (e) {
-    return toString(str)
+    return toError(str) || toString(str)
   }
 }
 
@@ -73,6 +79,10 @@ internals.formatDiff = function formatDiff (assertation) {
        && (!actual || !expected)
      ) {
       str = `Expected ${typeof expected} but got ${typeof actual}`
+    }
+    // error type
+    else if (actual instanceof Error) {
+      str = chalk.white('Expected to not ') + chalk.bold('throw') + chalk.white(' but got ') + chalk.bold(actual.message)
     }
     // string difference
     else if (typeof expected === 'string') {
@@ -155,7 +165,7 @@ internals.formatFail = function formatFail (assertion) {
 internals.outputTestName = function outputTestName (tests, testNumber, output) {
   const test = tests.get(testNumber)
 
-  if (!test.hasOutputted) {
+  if (test && !test.hasOutputted) {
     test.hasOutputted = true
     output.push(test.output)
   }

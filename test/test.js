@@ -83,6 +83,11 @@ test('failures', (t) => {
       , 'diffs strings'
     )
 
+    t.ok(
+      _.find(lines, (line) => line.includes('Expected to not throw'))
+      , 'outputs tests not expected to throw'
+    )
+
     t.equal(
       lines[lines.length - 4].split(':')[0]
       , 'total'

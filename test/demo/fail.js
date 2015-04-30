@@ -27,3 +27,11 @@ test('"Hell, world!" === "Hello, world!"', (t) => {
     t.equal('Hell, world!', 'Hello, world!')
   }, 100)
 })
+
+test('error thrown', (t) => {
+  t.plan(1)
+  const throws = () => {
+    throw new Error('ooopsie')
+  }
+  t.doesNotThrow(throws)
+})
