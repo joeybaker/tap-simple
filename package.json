@@ -44,8 +44,9 @@
     "doctoc": "doctoc README.md && if [ -f CONTRIBUTING.md ]; then doctoc CONTRIBUTING.md; fi && if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != '' ]]; then git add README.md CONTRIBUTING.md && git commit --no-verify -m'table of contents update'; fi",
     "gitPull": "git pull --rebase origin master",
     "gitPush": "git push --follow-tags --no-verify && git push --tags --no-verify",
+    "gitCommitBuild": "if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != '' ]]; then git add index.js lib/l-trim-list.js lib/symbols.js && git commit --no-verify -m'update build files'; fi",
     "build": "babel index.es6 -o index.js; babel lib/l-trim-list.es6 -o lib/l-trim-list.js; babel lib/symbols.es6 -o lib/symbols.js",
-    "release": "source ./scripts.sh && npm run build && npm run requireGitClean && npm run gitPull && npm run dmn && npm run doctoc && npm run lint && npm test && npm_release $@"
+    "release": "source ./scripts.sh && npm run build && npm run gitCommitBuild && npm run requireGitClean && npm run gitPull && npm run dmn && npm run doctoc && npm run lint && npm test && npm_release $@"
   },
   "config": {
     "notes": "important to correct the path of npm so that the git hook doesn't error",
