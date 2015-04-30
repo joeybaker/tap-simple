@@ -72,7 +72,7 @@ internals.formatDiff = function formatDiff (assertation) {
       (typeof expected !== typeof actual || typeof expected === 'object')
        && (!actual || !expected)
      ) {
-      str = 'Expected ' + typeof expected + ' but got ' + typeof actual
+      str = `Expected ${typeof expected} but got ${typeof actual}`
     }
     // string difference
     else if (typeof expected === 'string') {
