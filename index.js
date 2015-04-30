@@ -66,6 +66,8 @@ var _spinner = require('char-spinner');
 
 var _spinner2 = _interopRequireDefault(_spinner);
 
+require('babel/polyfill');
+
 var OUTPUT_PADDING = '  ';
 var objdiff = _difflet2['default']({
   indent: OUTPUT_PADDING.length,

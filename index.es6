@@ -1,3 +1,4 @@
+require('babel/polyfill')
 import _ from 'lodash'
 import ansidiff from 'ansidiff'
 import chalk from 'chalk'
