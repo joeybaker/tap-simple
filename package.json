@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "name": "tap-simple",
   "description": "Simple tap formatter: does not clutter output with successes and shows a diff of actual vs. expected.",
   "authors": [
