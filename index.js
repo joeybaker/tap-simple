@@ -97,31 +97,46 @@ internals.formatDiff = function formatDiff (assertation) {
 }
 
 internals.formatFail = function formatFail (assertion) {
+  const error = assertion.error
   let out = ''
-  const filepath = assertion.error.at.file
+
+  if (!error.at){
+    // TODO: deal with error.operator === error
+    // tapout seems to do a really bad job
+    // const errorPrefix = '{ [Error'
+    // const stack = error.stack
+    // const message = `${errorPrefix}: ${error[errorPrefix]}`
+    // const err = new Error(message)
+    // err.message = message
+    // err.stack = stack
+    // console.log(err)
+    return out
+  }
+
+  const filepath = error.at.file
   /* eslint-disable no-unused-vars */
   // bug in eslint; related to https://github.com/eslint/eslint/issues/2405
-  const lineNumber = assertion.error.at.line
+  const lineNumber = error.at.line
   /* eslint-enable no-unused-vars */
-  const columnNumber = assertion.error.at.character
+  const columnNumber = error.at.character
 
-  if (!assertion.error.at.line) {
+  if (!error.at.line) {
     out += internals.pad(chalk.grey(`untraceable async source: ${filepath}`), 3) + '\n\n'
   }
   else {
     const contents = fs.readFileSync(filepath).toString().split('\n')
-    const line = contents[assertion.error.at.line - 1]
-    const previousLine = contents[assertion.error.at.line - 2]
-    const nextLine = contents[assertion.error.at.line]
-    const lineNumber = parseInt(assertion.error.at.line, 10)
-    const previousLineNumber = parseInt(assertion.error.at.line, 10) - 1
-    const nextLineNumber = parseInt(assertion.error.at.line, 10) + 1
+    const line = contents[error.at.line - 1]
+    const previousLine = contents[error.at.line - 2]
+    const nextLine = contents[error.at.line]
+    const lineNumber = parseInt(error.at.line, 10)
+    const previousLineNumber = parseInt(error.at.line, 10) - 1
+    const nextLineNumber = parseInt(error.at.line, 10) + 1
 
     const lines = lTrimList([
       line, previousLine, nextLine
       ])
 
-    const atCharacterPadding = repeat(' ', parseInt(assertion.error.at.character, 10) + parseInt(lineNumber.toString().length, 10) + 2)
+    const atCharacterPadding = repeat(' ', parseInt(error.at.character, 10) + parseInt(lineNumber.toString().length, 10) + 2)
 
     out += internals.pad(chalk.grey(`${filepath}:${lineNumber}:${columnNumber}`), 2) + '\n'
 
